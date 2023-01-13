@@ -1,0 +1,5 @@
+# Porting Advisor for Graviton test file
+
+OpenBLAS>=0.3.17
+SciPy>=1.7.2
+NumPy>=1.21.1

@@ -1,0 +1,43 @@
+{
+    "languageRules": [
+        {
+            "name": "Language",
+            "minVersion": "1.2.3",
+            "recommendedVersion": "2.3.4",
+            "extensions": [".py"],
+            "dependencyFiles": ["requirements.txt"],
+            "description": "Additional Instructions",
+            "detailsUrl": "https://github.com/aws/aws-graviton-getting-started/",
+            "overrideText": "Only this will show up"
+        }
+    ],
+    "toolsRules": [
+        {
+            "name": "Tool",
+            "minVersion": "1.2.3",
+            "recommendedVersion": "2.3.4",
+            "description": "Additional Instructions",
+            "detailsUrl": "https://github.com/aws/aws-graviton-getting-started/",
+            "overrideText": "Only this will show up"
+        }
+    ],
+    "libraryRules": [
+        {
+            "name": "name",
+            "minVersion": "1.2.3",
+            "recommendedVersion": "2.3.4",
+            "description": "Additional Instructions",
+            "detailsUrl": "https://github.com/aws/aws-graviton-getting-started/",
+            "overrideText": "Only this will show up"
+        },
+        {
+            "name": "special-library",
+            "specialInstructions": "this library requires a manual build",
+            "detailsUrl": "https://howtobuildthislibrarymanually.com" 
+        },
+        { 
+            "name": "unsupported-library",
+            "unsupported": true 
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+source 'https://rubygems.org'
+
+gem 'rails', '~> 6.1.6.1'
+gem "rake", ">= 11.1"
+gem 'actionpack', rails_version
+gem 'bcrypt', '~> 3.1', '>= 3.1.14'
+gem "cucumber", RUBY_VERSION >= "2.5" ? "~> 5.1.2" : "~> 4.1"
+gem 'gc_tracer', require: false, platform: :mri
+gem 'gssapi', group: :kerberos
+gem 'mail', git: 'https://github.com/discourse/mail.git'
+gem "turbo-rails"
+
+group :test do
+    gem "httpclient"
+    
+    if RUBY_ENGINE == "jruby"
+      gem "jruby-openssl"
+    end
+end

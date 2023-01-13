@@ -1,0 +1,32 @@
+{
+    "languageRules": {
+        "name": "Java",
+        "detailsUrl": "https://github.com/aws/aws-graviton-getting-started/blob/main/java.md",
+        "extensions": [".java", ".jar", ".war"],
+        "dependencyFiles": ["pom.xml"],
+        "minVersion": "8",
+        "recommendedVersion": "11"
+    },
+    "toolsRules": [
+        {
+            "name": "corretto",
+            "details": "detected java code. we recommend using Corretto.",
+            "detailsUrl": "https://aws.amazon.com/corretto/"
+        }
+    ],
+    "libraryRules": [
+        { "name": "commons-crypto", "minVersion": "1.1.0" },
+        { "name": "Fingagle", "minVersion": "20.12.0" },
+        { "name": "hadoop-lzo", "specialInstructions": "this library requires a manual build", "detailsUrl": "https://github.com/aws/aws-graviton-getting-started/blob/main/java.md#building-multi-arch-jars" },
+        { "name": "jansi-native", "specialInstructions": "this library requires a manual build", "detailsUrl": "https://github.com/aws/aws-graviton-getting-started/blob/main/java.md#building-multi-arch-jars" },
+        { "name": "jffi", "minVersion": "1.2.13" },
+        { "name": "leveldbjni-all", "unsupported": true },
+        { "name": "lz4-java", "minVersion": "1.4.0" },
+        { "name": "netty-transport-native-epoll", "minVersion": "4.1.50" },
+        { "name": "netty-tcname", "minVersion": "2.0.31" },
+        { "name": "rockdbjni", "minVersion": "5.0.1" },
+        { "name": "sigar", "specialInstructions": "this library requires a manual build", "detailsUrl": "https://github.com/aws/aws-graviton-getting-started/blob/main/java.md#building-multi-arch-jars" },
+        { "name": "snappy-java", "minVersion": "1.1.4" },
+        { "name": "zstd-jni", "minVersion": "1.2.0" }
+    ]
+}

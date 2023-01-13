@@ -1,0 +1,9 @@
+{
+    "languageRules": {
+        "name": "Node.js",
+        "extensions": [".js"],
+        "dependencyFiles": ["package.json"]
+    },
+    "toolsRules": [],
+    "libraryRules": []
+}

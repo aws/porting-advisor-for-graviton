@@ -1,0 +1,131 @@
+# Copyright 2017 Arm Ltd.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: porting-advisor 1.0\n"
+"Report-Msgid-Bugs-To: chris.january@arm.com\n"
+"POT-Creation-Date: 2017-11-16 21:44-0700\n"
+"PO-Revision-Date: 2017-12-15 16:21+0000\n"
+"Last-Translator: Chris January <chris.january@arm.com>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/advisor/ported_source_files_remark.py:25
+#, python-format
+msgid "%d source files are already ported to aarch64"
+msgstr "%d source files are already ported to aarch64"
+
+#: src/advisor/arch_specific_library_issue.py:25
+#, python-format
+msgid "architecture-specific library is not available on aarch64: lib%s"
+msgstr "architecture-specific library is not available on aarch64: lib%s"
+
+#: src/advisor/config_guess_remark.py:26
+msgid "autoconf config.guess recognizes aarch64 architecture"
+msgstr "autoconf config.guess recognizes aarch64 architecture"
+
+#: src/advisor/config_guess_issue.py:26
+msgid "autoconf config.guess needs updating to recognize aarch64 architecture"
+msgstr "autoconf config.guess needs updating to recognize aarch64 architecture"
+
+#: src/advisor/inline_asm_issue.py:25
+msgid "architecture-specific inline assembly"
+msgstr "architecture-specific inline assembly"
+
+#: src/advisor/ported_inline_asm_remark.py:25
+#, python-format
+msgid "%d inline assembly statements already ported to aarch64"
+msgstr "%d inline assembly statements already ported to aarch64"
+
+#: src/advisor/files_scanned_remark.py:26
+#, python-format
+msgid "%d files scanned."
+msgstr "%d files scanned."
+
+#: src/advisor/no_issues_found_remark.py:25
+msgid "No issues found."
+msgstr "No issues found."
+
+#: src/advisor/preprocessor_error_issue.py:25
+#, python-format
+msgid "preprocessor error on aarch64: %s"
+msgstr "preprocessor error on aarch64: %s"
+
+#: src/advisor/pragma_simd_issue.py:25
+#, python-format
+msgid "simd pragma: %s"
+msgstr "simd pragma: %s"
+
+#: src/advisor/intrinsic_issue.py:25
+#, python-format
+msgid "architecture-specific intrinsic: %s"
+msgstr "architecture-specific intrinsic: %s"
+
+#: src/advisor/report_item.py:40
+#, python-format
+msgid "%(file)s:%(lineno)s: %(description)s"
+msgstr "%(file)s:%(lineno)s: %(description)s"
+
+#: src/advisor/report_item.py:45
+#, python-format
+msgid "%(file)s: %(description)s"
+msgstr "%(file)s: %(description)s"
+
+#: src/advisor/report_item.py:49
+#, python-format
+msgid "%(description)s"
+msgstr "%(description)s"
+
+#: src/advisor/main.py:35
+msgid "root directory of source tree (default: .)"
+msgstr "root directory of source tree (default: .)"
+
+#: src/advisor/main.py:38
+msgid "output file name"
+msgstr "output file name"
+
+#: src/advisor/main.py:41
+msgid "suppress file errors"
+msgstr "suppress file errors"
+
+#: src/advisor/main.py:49
+#, python-format
+msgid "%s: directory not found."
+msgstr "%s: directory not found."
+
+#: src/advisor/main.py:52
+#, python-format
+msgid "%s: not a directory."
+msgstr "%s: not a directory."
+
+#: src/advisor/compiler_specific_issue.py:25
+#, python-format
+msgid "compiler specific code: %s"
+msgstr "compiler specific code: %s"
+
+#: src/advisor/asm_source_issue.py:25
+msgid "architecture-specific assembly source file"
+msgstr "architecture-specific assembly source file"
+
+#: src/advisor/other_issues.py:25
+#, python-format
+msgid "%d other issues"
+msgstr "%d other issues"

@@ -1,0 +1,8 @@
+usage: porting-advisor [-h] [--issue-types ISSUE_TYPES] [--no-filter]
+                       [--no-progress] [--output OUTPUT]
+                       [--output-format OUTPUT_FORMAT] [--quiet]
+                       [--target-os TARGET_OS] [--version]
+                       [--logging-level {error,warning,info,debug}]
+                       [--log-file LOG_FILE] [--log-to-console]
+                       DIRECTORY
+porting-advisor: error: the following arguments are required: DIRECTORY

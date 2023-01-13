@@ -1,0 +1,13 @@
+{
+    "languageRules": {
+        "name": "Go",
+        "detailsUrl": "https://github.com/aws/aws-graviton-getting-started/blob/main/golang.md",
+        "extensions": [".go"],
+        "dependencyFiles": ["go.mod"],
+        "minVersion": "1.16",
+        "recommendedVersion": "1.18"
+    },
+    "libraryRules": [
+        { "name": "github.com/golang/snappy", "minVersion": "0.0.2" }
+    ]
+}

@@ -1,17 +1,178 @@
-## My Project
+Porting Advisor for Graviton
+=============================
 
-TODO: Fill this README out!
+This is a fork of [Porting advisor](https://github.com/arm-hpc/porting-advisor), an open source project by the ARM High Performance Computing group. Originally, it was coded as a Python module that analyzed some known incompatibilities for C and Fortran code.
 
-Be sure to:
+ It is a command line tool that analyzes source code for known code patterns and dependency libraries. It then generates a report with any incompatibilities with our Graviton processors. This tool provides suggestions of minimal required and/or recommended versions to run on Graviton instances for both language runtime and dependency libraries. It can run on non-ARM based machines (no Graviton processor needed). This tool does not work on binaries, just source code. It does not make any code modifications, it doesn’t make API level recommendations, nor does it send data back to AWS.
 
-* Change the title in this README
-* Edit your repository description on GitHub
+ This tool scans all files in a source tree, regardless of whether they are included by the build system or not. As such it may erroneously report issues in files that appear in the source tree but are excluded by the build system. Currently, the tool supports the following languages/dependencies:
 
-## Security
+* Python 3+
+    * Python version
+    * PIP version
+    * Dependency versions in requirements.txt file
+* Java 8+
+    * Java version
+    * Dependency versions in pom.xml file
+    * JAR scanning for native method  calls (requires JAVA to be installed)
+* Go 1.11+
+    * Go version
+    * Dependency versions on go.mod file
+* C, C++, Fortran
+    * Inline assembly with no corresponding aarch64 inline assembly.
+    * Assembly source files with no corresponding aarch64 assembly source files.
+    * Missing aarch64 architecture detection in autoconf config.guess scripts.
+    * Linking against libraries that are not available on the aarch64 architecture.
+    * Use of architecture specific intrinsic.
+    * Preprocessor errors that trigger when compiling on aarch64.
+    * Use of old Visual C++ runtime (Windows specific).
+    * The following types of issues are detected, but not reported by default:
+        * Compiler specific code guarded by compiler specific pre-defined macros.
+    * The following types of cross-compile specific issues are detected, but not reported by default.
+        * Architecture detection that depends on the host rather than the target.
+        * Use of build artifacts in the build process.
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
 
-## License
+For more information on how to modify issues reported, use the tool’s built-in help:
 
-This project is licensed under the Apache-2.0 License.
+```
+./porting-advisor-linux-x86_64 -–help
+```
 
+If you run into any issues, see our [CONTRIBUTING](CONTRIBUTING.md#reporting-bugsfeature-requests) file.
+
+# How to run:
+
+## As a Python script
+
+**Pre-requisites**
+
+- Python 3.10 or above.
+- (Optionally) Open JDK 17 (or above) and Maven 3.5 (or above) if you want to scan JAR files for native methods.
+
+**Enable Python Environment**
+
+Linux/Mac:
+```
+$. python3 -m venv .venv
+$. source .venv/bin/activate
+```
+
+Powershell:
+```
+PS> python -m venv .venv
+PS> .\.venv\Scripts\Activate.ps1
+```
+
+**Install requirements**
+```
+$. pip install -r requirements.txt
+```
+
+**Run tool (console output)**
+```
+$. python src/porting-advisor.py ~/my/path/to/my/repo
+```
+
+**Run tool (HTML report)**
+```
+$. python src/porting-advisor.py ~/my/path/to/my/repo --output report.html
+```
+
+## As a binary
+
+### Generating the binary
+
+**Pre-requisites**
+
+- Python 3.10 or above with the [--enable-shared](https://docs.python.org/3/using/configure.html#cmdoption-enable-shared) option configured (see [below](#using---enable-shared-with-python) for instructions on how to do this with pyenv)
+- (Optionally) Open JDK 17 (or above) and Maven 3.5 (or above) if you want the binary to be able to scan JAR files for native methods.
+
+The `build.sh` script will generate a self-contained binary (for Linux/MacOS). It will be output to a folder called `dist`.
+
+```
+$ ./build.sh
+```
+
+For Windows, the `Build.ps1` will generate a folder with an EXE and all the files it requires to run.
+
+```
+PS> .\Build.ps1
+```
+
+**Running the binary**
+
+**Pre-requisites**
+
+Once you have the binary generated, it will only require Java 11 Runtime (or above) if you want to scan JAR files for native methods. Otherwise, the file is self-contained and doesn't need Python to run.
+
+Default behaviour, console output:
+```
+$ ./porting-advisor-linux-x86_64 ~/my/path/to/my/repo
+```
+
+Generating HTML report:
+```
+$ ./porting-advisor-linux-x86_64 ~/my/path/to/my/repo --output report.html
+```
+
+Generating a report of just dependencies:
+```
+$ ./porting-advisor-linux-x86_64 ~/my/path/to/my/repo --output dependencies.xlsx --output-format dependencies
+```
+
+### Sample console report output:
+
+```
+./dist/porting-advisor-linux-x86_64 ./sample-projects/
+| Elapsed Time: 0:00:03
+
+Porting Advisor for Graviton v1.0.0
+Report date: 2023-01-06 23:48:20
+
+13 files scanned.
+detected java code. we recommend using Corretto. see https://aws.amazon.com/corretto/ for more details.
+detected python code. if you need pip, version 19.3 or above is recommended. we detected that you have version 22.2.1.
+detected python code. min version 3.7.5 is required. we detected that you have version 3.10.6. see https://github.com/aws/aws-graviton-getting-started/blob/main/python.md for more details.
+./sample-projects/java-samples/pom.xml: dependency library: leveldbjni-all is not supported on Graviton
+./sample-projects/java-samples/pom.xml: using dependency library snappy-java version 1.1.3. upgrade to at least version 1.1.4
+./sample-projects/java-samples/pom.xml: using dependency library zstd-jni version 1.1.0. upgrade to at least version 1.2.0
+./sample-projects/python-samples/incompatible/requirements.txt:3: using dependency library OpenBLAS version 0.3.16. upgrade to at least version 0.3.17
+detected go code. min version 1.16 is required. version 1.18 or above is recommended. we detected that you have version 1.15. see https://github.com/aws/aws-graviton-getting-started/blob/main/golang.md for more details.
+./sample-projects/java-samples/pom.xml: using dependency library hadoop-lzo. this library requires a manual build  more info at: https://github.com/aws/aws-graviton-getting-started/blob/main/java.md#building-multi-arch-jars
+./sample-projects/python-samples/incompatible/requirements.txt:5: dependency library NumPy is present. min version 1.19.0 is required.
+detected java code. min version 8 is required. version 11 or above is recommended. see https://github.com/aws/aws-graviton-getting-started/blob/main/java.md for more details.
+
+Use --output FILENAME.html to generate an HTML report.
+```
+
+# Appendix
+
+## Using --enable-shared with Python on Linux/MacOS
+
+A quick way to do this is to use [pyenv](https://github.com/pyenv/pyenv-installer#install).
+
+- Install pyenv, restart your shell and check for updates:
+```
+curl https://pyenv.run | bash
+exec $SHELL
+pyenv update
+```
+
+- Install Python 3.10 and set it as the default:
+```
+CONFIGURE_OPTS="--enable-shared" pyenv install 3.10.6
+pyenv global 3.10.6
+```
+## Installing Python with pyenv on Windows
+
+- You can use [pyenv-win](https://github.com/pyenv-win/pyenv-win) as recommended by the pyenv team.
+```
+Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
+```
+
+- Restart your Powershell Window, install Python 3.10, and set it as the default:
+```
+pyenv install 3.10.6
+pyenv global 3.10.6
+```
