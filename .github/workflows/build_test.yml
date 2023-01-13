@@ -36,7 +36,7 @@ jobs:
         chmod +x *.sh
         ./test.sh
     
-     - name: Code coverage
+    - name: Code coverage
       run: |
         ./.venv/bin/python -m coverage report
   
