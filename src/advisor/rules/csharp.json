@@ -1,0 +1,9 @@
+{
+    "languageRules": {
+        "name": "C#",
+        "extensions": [".cs"],
+        "dependencyFiles": ["*.csproj"]
+    },
+    "toolsRules": [],
+    "libraryRules": []
+}

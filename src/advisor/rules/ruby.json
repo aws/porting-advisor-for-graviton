@@ -1,0 +1,9 @@
+{
+    "languageRules": {
+        "name": "Ruby",
+        "extensions": [".rb"],
+        "dependencyFiles": ["Gemfile"]
+    },
+    "toolsRules": [],
+    "libraryRules": []
+}

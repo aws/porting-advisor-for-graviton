@@ -1,0 +1,15 @@
+altgraph==0.17.2
+certifi==2022.12.7
+charset-normalizer==2.1.1
+coverage==7.0.1
+idna==3.4
+Jinja2==3.1.2
+MarkupSafe==2.1.1
+packaging==21.3
+progressbar33==2.4
+pyinstaller==5.0.1
+pyinstaller-hooks-contrib==2022.4
+pyparsing==3.0.9
+requests==2.28.1
+urllib3==1.26.13
+XlsxWriter==3.0.3

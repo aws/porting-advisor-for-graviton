@@ -1,0 +1,7 @@
+altgraph==0.17.2
+Jinja2==3.1.2
+MarkupSafe==2.1.1
+packaging==21.3
+progressbar33==2.4
+pyparsing==3.0.9
+XlsxWriter==3.0.3

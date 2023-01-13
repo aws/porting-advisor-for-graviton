@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Porting Advisor for Graviton v{{tool_version}} Readiness Report for {{ root_directory_basename }}</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: #f2f3f3;
+            color: #16191f;
+            font-family: "Amazon Ember", "Helvetica Neue", Roboto, Arial, sans-serif;
+            margin: 0;
+        }
+
+        .header {
+            padding: .5em;
+            min-height: 50px;
+            background-color: #232f3e;
+	        color: #fff;
+            font-size: 14pt;
+            font-weight: 300;
+        }
+
+        .header .logo {
+            display: block;
+            float: left;
+            margin: 10px
+        }
+
+        .header .title {
+            float: left;
+            margin-left: 20px;
+            margin-top: 12px;
+        }
+
+        .header .project-name {
+            color: #FF9900;
+        }
+
+        .advice {
+            padding: 1em;
+        }
+
+        footer {
+            padding: 1em;
+        }
+
+        td {
+            padding: 0.5em;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+            border-top: 1px solid rgb(234, 237, 237);
+            box-shadow: rgba(0, 28, 36, 0.3) 0px 1px 1px 0px, rgba(0, 28, 36, 0.15) 1px 1px 1px 0px, rgba(0, 28, 36, 0.15) -1px 1px 1px 0px;
+
+        }
+        .card-title {
+            background-color: #fafafa;
+            color: #16191f;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 20px;
+        }
+
+        .card-content {
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .card-content-table {
+            padding: 0;
+            background-color: #fff;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            font-weight: 400;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table thead {
+            background-color: #fafafa;
+            color: #16191f;
+            font-weight: 700;
+        }
+
+        thead th {
+            border-right: 1px solid #eaeded;
+        }
+
+        th, td {
+            padding: 8px 20px;
+            font-size: 14px;
+            
+        }
+
+        tr {
+            border-bottom: 1px solid #eaeded;
+        }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .st0{fill:none;stroke:#545B64;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:10;}
+        .st1{fill:#545B64;stroke:#545B64;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:10;}
+        .st2{fill:none;stroke:#545B64;stroke-width:2;stroke-miterlimit:10;}
+        .st3{fill:none;stroke:#545B64;stroke-width:2;stroke-linecap:square;stroke-miterlimit:10;}
+        .st4{fill:#545B64;}
+        .st5{fill:none;stroke:#545B64;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+        .st6{fill:none;stroke:#545B64;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;}
+
+        #summary .st4 {
+            fill: #0073bb;
+        }
+
+        #neutral .st4 {
+            fill: #545B64;
+        }
+
+        #positive .st4 {
+            fill: #1d8102;
+        }
+
+        #negative .st4 {
+            fill: #d13212;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="title">
+            Porting Advisor for Graviton v{{tool_version}}
+        </div>
+    </div>
+    <div class="content">
+        <div class="card">
+            <div class="card-title">Project Information</div>
+            <div class="card-content">
+                <div class="card-column">
+                    <div class="section">
+                        <div class="section-header">Project:</div>
+                        <div class="section-content">{{ root_directory_basename }}</div>
+                    </div>
+    
+                    <div class="section">
+                        <div class="section-header">Source root:</div>
+                        <div class="section-content">{{ root_directory }}</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-header">Report Date:</div>
+                        <div id="report-date" class="section-content">{{ report_date }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Results</div>
+            <div class="card-content-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>File</th>
+                            <th>Line #</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td><svg class="icon"><use xlink:href="#{{ item.item_type }}"></use></svg></td>
+                            <td>{{ item.filename if item.filename else '' }}</td>
+                            <td>{{item.lineno if item.lineno else '' }}</td>
+                            <td>{{ item.description }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <!-- status-info -->
+            <symbol id="summary" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;"><title>summary</title>
+                <g id="grid_x5F_locked">
+                </g>
+                <g id="icon">
+                    <g>
+                        <path class="st4" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M8,14c-3.3,0-6-2.7-6-6s2.7-6,6-6s6,2.7,6,6
+                            S11.3,14,8,14z"/>
+                        <polygon class="st4" points="9,7 6,7 6,9 7,9 7,10 6,10 6,12 10,12 10,10 9,10 		"/>
+                        <polygon class="st4" points="9,6 9,4 7,4 7,6 		"/>
+                    </g>
+                </g>
+            </symbol>
+            <!-- status-warning -->
+            <symbol id="neutral" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;"><title>neutral</title>
+                <g id="grid_x5F_locked">
+                </g>
+                <g id="icon">
+                    <g>
+                        <path class="st4" d="M15.9,14.6l-7-14c-0.3-0.7-1.5-0.7-1.8,0l-7,14c-0.2,0.3-0.1,0.7,0,1C0.3,15.8,0.7,16,1,16h14
+                            c0.3,0,0.7-0.2,0.9-0.5C16,15.2,16,14.9,15.9,14.6z M2.6,14L8,3.2L13.4,14H2.6z"/>
+                        <polygon class="st4" points="7,11 7,13 9,13 9,11 		"/>
+                        <rect x="7" y="6" class="st4" width="2" height="4"/>
+                    </g>
+                </g>
+            </symbol>
+            <!-- status-negative -->
+            <symbol id="positive" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;"><title>positive</title>
+            <g id="grid_x5F_locked">
+            </g>
+            <g id="icon">
+                <g>
+                    <path class="st4" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M8,14c-3.3,0-6-2.7-6-6s2.7-6,6-6s6,2.7,6,6
+                        S11.3,14,8,14z"/>
+                    <polygon class="st4" points="7,8.6 5,6.6 3.6,8 7,11.4 11.9,6.5 10.5,5.1 		"/>
+                </g>
+            </g>
+            </symbol>
+            <!-- status-negative -->
+            <symbol id="negative" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;"><title>negative</title>
+                <g id="grid_x5F_locked">
+                </g>
+                <g id="icon">
+                    <g>
+                        <path class="st4" d="M13.7,2.3C12.1,0.8,10.1,0,8,0S3.9,0.8,2.3,2.3C0.8,3.9,0,5.9,0,8s0.8,4.1,2.3,5.7C3.9,15.2,5.9,16,8,16
+                            s4.1-0.8,5.7-2.3C15.2,12.1,16,10.1,16,8S15.2,3.9,13.7,2.3z M12.2,12.2C11.1,13.4,9.6,14,8,14s-3.1-0.6-4.2-1.8S2,9.6,2,8
+                            s0.6-3.1,1.8-4.2S6.4,2,8,2s3.1,0.6,4.2,1.8S14,6.4,14,8S13.4,11.1,12.2,12.2z"/>
+                        <polygon class="st4" points="10.1,4.5 8,6.6 5.9,4.5 4.5,5.9 6.6,8 4.5,10.1 5.9,11.5 8,9.4 10.1,11.5 11.5,10.1 9.4,8 11.5,5.9 
+                                    "/>
+                    </g>
+                </g>
+            </symbol>
+        </svg>
+    </div>
+</body>
+
+</html>

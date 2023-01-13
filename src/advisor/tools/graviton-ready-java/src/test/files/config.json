@@ -1,0 +1,14 @@
+{
+  "classes" : [ {
+    "implementationTitle" : "ImplementationTitle",
+    "implementationVendor" : "ImplementationVendor",
+    "implementationVersionRange" : "[1.0.0,2.0.0)",
+    "specificationTitle" : "SpecificationTitle",
+    "specificationVendor" : "SpecificationVendor",
+    "specificationVersionRange" : "[1.0.0,2.0.0)",
+    "status" : "OK",
+    "description" : "Description goes here",
+    "url" : "http://example.com",
+    "lastUpdated" : "2022-01-22T00:50:03.114+00:00"
+  } ]
+}
