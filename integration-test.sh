@@ -99,6 +99,7 @@ declare -a dependencies=("<si><t>component</t></si><si><t>version</t></si><si><t
 # xlsx files are compressed files, so we need to unzip them and then compare them
 mkdir ./temp
 unzip -q ./test.xlsx -d ./temp
+cat ./temp/xl/sharedStrings.xml
 test_report 'dependencies' './temp/xl/sharedStrings.xml' "${dependencies[@]}"
 rm test.xlsx
 rm -rf ./temp
