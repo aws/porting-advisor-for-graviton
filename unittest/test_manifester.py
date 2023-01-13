@@ -109,14 +109,13 @@ require (
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-    <PackageReference Include="xunit" Version="2.4.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
 </Project>''')
         dependencies = manifester.get_dependencies('sampledotnet.csproj', io_object)
-        self.assertEqual(5, len(dependencies))
+        self.assertEqual(4, len(dependencies))
         self.assertEqual('Microsoft.Extensions.Logging.Console', dependencies[0].name)
         self.assertEqual('6.0.0', dependencies[0].version)
         self.assertEqual('sampledotnet.csproj', dependencies[0].filename)
