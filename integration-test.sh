@@ -66,7 +66,7 @@ declare -a dependencies=("<si><t>component</t></si><si><t>version</t></si><si><t
                         "<si><t>Microsoft.NET.Test.Sdk</t></si><si><t>16.5.0</t></si>"
                         "<si><t>Microsoft.VisualStudio.Setup.Configuration.Interop</t></si><si><t>3.1.2196</t></si>"
                         "<si><t>System.Linq.Async</t></si><si><t>6.0.1</t></si>"
-                        "<si><t>xunit</t></si><si><t>2.4.0</t></si>"
+                        "<si><t>xunit</t></si><si><t>2.4.1</t></si>"
                         "<si><t>coverlet.collector</t></si><si><t>1.2.0</t></si>"
                         "<si><t>OpenBLAS</t></si>"
                         "<si><t>SciPy</t></si>"
