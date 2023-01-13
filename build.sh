@@ -29,7 +29,7 @@ then
     fi
     
     echo "Making sure Python Virtual Environment is active"
-    source .venv/bin/activate
+    . .venv/bin/activate
     if [ $? -ne 0 ]; then
         echo "**ERROR**: could not activate Python Virtual Environment." && exit 1
     fi
