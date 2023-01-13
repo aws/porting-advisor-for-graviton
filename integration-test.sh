@@ -93,13 +93,12 @@ declare -a dependencies=("<si><t>component</t></si><si><t>version</t></si><si><t
                         "<si><t>mail</t></si>"
                         "<si><t>turbo-rails</t></si>"
                         "<si><t>httpclient</t></si>"
-                        "<si><t>jruby-openssl</t></si></sst>"
+                        "<si><t>jruby-openssl</t></si>"
                     )
 ./dist/$FILE_NAME ./sample-projects/ --output test.xlsx --output-format dependencies
 # xlsx files are compressed files, so we need to unzip them and then compare them
 mkdir ./temp
 unzip -q ./test.xlsx -d ./temp
-cat ./temp/xl/sharedStrings.xml
 test_report 'dependencies' './temp/xl/sharedStrings.xml' "${dependencies[@]}"
 rm test.xlsx
 rm -rf ./temp
