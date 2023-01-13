@@ -88,7 +88,7 @@ $Dependencies = @(
     "<si><t>mail</t></si>"
     "<si><t>turbo-rails</t></si>"
     "<si><t>httpclient</t></si>"
-    "<si><t>jruby-openssl</t></si></sst>"
+    "<si><t>jruby-openssl</t></si>"
 )
 Invoke-Expression ".\dist\$Filename\$Filename.exe .\sample-projects --output test.xlsx --output-format dependencies"
 # xlsx files are compressed files, so we need to unzip them and then compare them
