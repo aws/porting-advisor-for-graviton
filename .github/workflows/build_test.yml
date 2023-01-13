@@ -35,7 +35,10 @@ jobs:
       run: |
         chmod +x *.sh
         ./test.sh
-        python -m coverage report
+    
+     - name: Code coverage
+      run: |
+        ./.venv/bin/python -m coverage report
   
   build-windows:
     
@@ -69,4 +72,7 @@ jobs:
     - name: Run build and tests
       run: |
         .\Test.ps1
-        coverage report
+    
+    - name: Code coverage
+      run: |
+        .\.venv\Scripts\coverage report
