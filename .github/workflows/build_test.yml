@@ -35,7 +35,7 @@ jobs:
       run: |
         chmod +x *.sh
         ./test.sh
-        coverage report
+        python -m coverage report
   
   build-windows:
     
