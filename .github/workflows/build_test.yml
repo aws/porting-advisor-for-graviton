@@ -33,7 +33,6 @@ jobs:
     
     - name: Run build and tests
       run: |
-        chmod +x *.sh
         ./test.sh
     
     - name: Code coverage
