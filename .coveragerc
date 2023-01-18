@@ -1,0 +1,10 @@
+[run]
+omit =
+    */__init__.py
+    src/advisor/reports/dependencies_report.py
+    src/advisor/reports/html_report.py
+    src/advisor/scanners/auto_scanner.py
+    src/advisor/scanners/scanner.py
+    src/advisor/scanners/scanners.py
+    src/advisor/main.py
+    src/porting-advisor.py
