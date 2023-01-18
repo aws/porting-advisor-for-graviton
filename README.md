@@ -66,17 +66,17 @@ PS> .\.venv\Scripts\Activate.ps1
 
 **Install requirements**
 ```
-$. pip install -r requirements.txt
+$. pip3 install -r requirements.txt
 ```
 
 **Run tool (console output)**
 ```
-$. python src/porting-advisor.py ~/my/path/to/my/repo
+$. python3 src/porting-advisor.py ~/my/path/to/my/repo
 ```
 
 **Run tool (HTML report)**
 ```
-$. python src/porting-advisor.py ~/my/path/to/my/repo --output report.html
+$. python3 src/porting-advisor.py ~/my/path/to/my/repo --output report.html
 ```
 
 ## As a binary
@@ -85,7 +85,9 @@ $. python src/porting-advisor.py ~/my/path/to/my/repo --output report.html
 
 **Pre-requisites**
 
-- Python 3.10 or above with the [--enable-shared](https://docs.python.org/3/using/configure.html#cmdoption-enable-shared) option configured (see [below](#using---enable-shared-with-python) for instructions on how to do this with pyenv)
+- Python 3.10 or above.
+- PIP 3.
+- Python venv module.
 - (Optionally) Open JDK 17 (or above) and Maven 3.5 (or above) if you want the binary to be able to scan JAR files for native methods.
 
 The `build.sh` script will generate a self-contained binary (for Linux/MacOS). It will be output to a folder called `dist`.
@@ -144,35 +146,4 @@ detected go code. min version 1.16 is required. version 1.18 or above is recomme
 detected java code. min version 8 is required. version 11 or above is recommended. see https://github.com/aws/aws-graviton-getting-started/blob/main/java.md for more details.
 
 Use --output FILENAME.html to generate an HTML report.
-```
-
-# Appendix
-
-## Using --enable-shared with Python on Linux/MacOS
-
-A quick way to do this is to use [pyenv](https://github.com/pyenv/pyenv-installer#install).
-
-- Install pyenv, restart your shell and check for updates:
-```
-curl https://pyenv.run | bash
-exec $SHELL
-pyenv update
-```
-
-- Install Python 3.10 and set it as the default:
-```
-CONFIGURE_OPTS="--enable-shared" pyenv install 3.10.6
-pyenv global 3.10.6
-```
-## Installing Python with pyenv on Windows
-
-- You can use [pyenv-win](https://github.com/pyenv-win/pyenv-win) as recommended by the pyenv team.
-```
-Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
-```
-
-- Restart your Powershell Window, install Python 3.10, and set it as the default:
-```
-pyenv install 3.10.6
-pyenv global 3.10.6
 ```

@@ -63,46 +63,18 @@ See the [LICENSE](LICENSE) file for our project's licensing. We will ask you to 
 ## Development setup
 
 ### Pre-requisites
-- Python 3.10 with [--enable-shared](https://docs.python.org/3/using/configure.html#cmdoption-enable-shared) (required for building the binary with [PyInstaller](https://github.com/pyinstaller/pyinstaller)) and [--enable-loadable-sqlite-extensions](https://docs.python.org/3/using/configure.html#cmdoption-enable-loadable-sqlite-extensions) (required by [coverage](https://github.com/nedbat/coveragepy)) options configured (see [instructions below](#installing-python-with-pyenv)).
+- Python 3.10.
+- PIP 3.
+- Python venv module.
 - (Optionally) Open JDK 17 (or above) and Maven 3.5 (or above) if you need to work with [Graviton Ready for Java](src/advisor/tools/graviton-ready-java/README.md) which enables you to scan JAR files for native methods.
-
-### Installing Python with pyenv on Linux/MacOS
-
-A quick way to do this is to use [pyenv](https://github.com/pyenv/pyenv-installer#install). You can follow the steps below:
-
-- Install pyenv, restart your shell and check for updates:
-```
-curl https://pyenv.run | bash
-exec $SHELL
-pyenv update
-```
-
-- Install Python 3.10 and set it as the default:
-```
-CONFIGURE_OPTS="--enable-shared --enable-loadable-sqlite-extensions" pyenv install 3.10.6
-pyenv global 3.10.6
-```
-
-### Installing Python with pyenv on Windows
-
-You can use [pyenv-win](https://github.com/pyenv-win/pyenv-win) as recommended by the pyenv team.
-```
-Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
-```
-
-Restart your Powershell Window, install Python 3.10, and set it as the default:
-```
-pyenv install 3.10.6
-pyenv global 3.10.6
-```
 
 ### Working with Python virtual enviroment
 
 We recommend you work using Python virtual environments to keep the requirements for this project isolated. To enable the virtual environment and install dependencies (assuming your default `python` interpreter is 3.10):
 
 ```
-python -m venv .venv
-pip install -r requirements-build.txt
+python3 -m venv .venv
+pip3 install -r requirements-build.txt
 ```
 
 ### Debugging
