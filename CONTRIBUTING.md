@@ -63,9 +63,7 @@ See the [LICENSE](LICENSE) file for our project's licensing. We will ask you to 
 ## Development setup
 
 ### Pre-requisites
-- Python 3.10.
-- PIP 3.
-- Python venv module.
+- Python 3.10 or above (with PIP3 and venv module installed).
 - (Optionally) Open JDK 17 (or above) and Maven 3.5 (or above) if you need to work with [Graviton Ready for Java](src/advisor/tools/graviton-ready-java/README.md) which enables you to scan JAR files for native methods.
 
 ### Working with Python virtual enviroment

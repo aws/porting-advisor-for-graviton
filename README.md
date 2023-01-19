@@ -47,7 +47,7 @@ If you run into any issues, see our [CONTRIBUTING](CONTRIBUTING.md#reporting-bug
 
 **Pre-requisites**
 
-- Python 3.10 or above.
+- Python 3.10 or above (with PIP3 and venv module installed).
 - (Optionally) Open JDK 17 (or above) and Maven 3.5 (or above) if you want to scan JAR files for native methods.
 
 **Enable Python Environment**
@@ -85,9 +85,7 @@ $. python3 src/porting-advisor.py ~/my/path/to/my/repo --output report.html
 
 **Pre-requisites**
 
-- Python 3.10 or above.
-- PIP 3.
-- Python venv module.
+- Python 3.10 or above (with PIP3 and venv module installed).
 - (Optionally) Open JDK 17 (or above) and Maven 3.5 (or above) if you want the binary to be able to scan JAR files for native methods.
 
 The `build.sh` script will generate a self-contained binary (for Linux/MacOS). It will be output to a folder called `dist`.
@@ -118,7 +116,7 @@ Generating HTML report:
 $ ./porting-advisor-linux-x86_64 ~/my/path/to/my/repo --output report.html
 ```
 
-Generating a report of just dependencies:
+Generating a report of just dependencies (this creates an Excel file with just the dependencies we found on the repo, no suggestions provided):
 ```
 $ ./porting-advisor-linux-x86_64 ~/my/path/to/my/repo --output dependencies.xlsx --output-format dependencies
 ```
