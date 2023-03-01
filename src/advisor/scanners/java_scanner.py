@@ -1,6 +1,7 @@
 import os
 from os import path
 from ..helpers.java.java_tool_invoker import JavaToolInvoker
+from ..helpers.utils import Utils
 from ..manifester.manifester import Manifester
 from ..reports.issues.native_methods_issue import NativeMethodsIssue
 from ..reports.report_item import ReportItem
@@ -51,6 +52,12 @@ class JavaScanner(LanguageScanner):
         self.add_language_remarks(report)
 
     def add_jar_remark(self, report):
-        if self._added_jar_remark == False:
-            report.add_remark(ReportItem('java is not installed. we need java to scan jar files for native methods'))
+        if not self._added_jar_remark:
+            if Utils.running_from_binary():
+                report.add_remark(ReportItem('java is not installed. '
+                                             'We need java to scan jar files for native methods'))
+            else:
+                # running from script, both java and Maven are needed
+                report.add_remark(ReportItem('java and/or Maven are not installed. '
+                                             'We need java and Maven to scan jar files for native methods'))
             self._added_jar_remark = True

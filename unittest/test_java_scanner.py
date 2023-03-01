@@ -1,5 +1,7 @@
 import io
 import unittest
+from unittest.mock import patch
+
 from src.advisor.reports.issues.dependency_version_issue import DependencyVersionIssue
 from src.advisor.reports.issues.unsupported_dependency_issue import UnsupportedDependencyIssue
 from src.advisor.reports.remarks.dependency_version_remark import DependencyVersionRemark
@@ -173,3 +175,19 @@ class TestJavaScaner(unittest.TestCase):
             f'detected java code. we recommend using Corretto. see https://aws.amazon.com/corretto/ for more details.',
             self.report.remarks[1].description
         )
+
+    @patch('src.advisor.scanners.java_scanner.Utils.running_from_binary')
+    @patch('src.advisor.scanners.java_scanner.ReportItem')
+    def test_add_java_remark_from_binary(self, report_item_mock, running_from_binary_mock):
+        item = 'java is not installed. We need java to scan jar files for native methods'
+        running_from_binary_mock.return_value = True
+        self.scanner.add_jar_remark(self.report)
+        report_item_mock.assert_called_once_with(item)
+
+    @patch('src.advisor.scanners.java_scanner.Utils.running_from_binary')
+    @patch('src.advisor.scanners.java_scanner.ReportItem')
+    def test_add_java_remark_from_script(self, report_item_mock, running_from_binary_mock):
+        item = 'java and/or Maven are not installed. We need java and Maven to scan jar files for native methods'
+        running_from_binary_mock.return_value = False
+        self.scanner.add_jar_remark(self.report)
+        report_item_mock.assert_called_once_with(item)
