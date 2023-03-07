@@ -81,5 +81,5 @@ class JavaToolInvoker():
             return False
 
         except:
-            logging.debug('Error checking for Graviton Ready JAR file.', exc_info=True)
+            logging.error('Error checking for Graviton Ready JAR file.', exc_info=True)
             return False

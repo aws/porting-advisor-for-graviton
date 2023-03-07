@@ -182,7 +182,7 @@ public class JarNativeInfo {
             cls = cl.loadClass(name);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (NoClassDefFoundError ignored) {
+        } catch (NoClassDefFoundError|IllegalAccessError ignored) {
         }
         return cls;
     }
