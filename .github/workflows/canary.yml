@@ -1,0 +1,114 @@
+name: Canary
+
+on:
+  on:
+  workflow_dispatch:
+  schedule:
+  # Run this once a day to check if everything is still working as expected.
+    - cron: "0 12 * * *"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["ubuntu-latest", "macos-latest"]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: ${{ secrets.ROLE }}
+        role-session-name: PAGravitonCanary
+        aws-region: ${{ secrets.AWS_REGION }}
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    
+    - name: Run build and tests
+      run: |
+        ./test.sh
+    
+    - name: Code coverage
+      run: |
+        ./.venv/bin/python -m coverage report
+    
+    - name: Send metric success
+      if: success()
+      run: |
+        aws cloudwatch put-metric-data --namespace TuxNetOps --metric-name porting-advisor-canary --value 1 --dimensions OS=${{ matrix.os }}
+    
+    - name: Send metric failure
+      if: failure()
+      run: |
+        aws cloudwatch put-metric-data --namespace TuxNetOps --metric-name porting-advisor-canary --value 0 --dimensions OS=${{ matrix.os }}
+  
+  build-windows:
+    
+    runs-on: "windows-latest"
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: ${{ secrets.ROLE }}
+        role-session-name: PAGravitonCanary
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Prevent adding secrets to repo
+      run: |
+          git clone https://github.com/awslabs/git-secrets.git target
+          cd target
+          ./install.ps1
+          echo "Git-secrets installation completed"
+          git secrets --register-aws --global
+          echo "Added aws secret templates"
+          git secrets --scan -r ../
+          echo "Repository scan completed"
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+      
+    - name: Run build and tests
+      run: |
+        .\Test.ps1
+    
+    - name: Code coverage
+      run: |
+        .\.venv\Scripts\coverage report
+    
+    - name: Send metrics success
+      if: success()
+      run: |
+        aws cloudwatch put-metric-data --namespace TuxNetOps --metric-name porting-advisor-canary --value 1 --dimensions OS=windows-latest
+    
+    - name: Send metric failure
+      if: failure()
+      run: |
+        aws cloudwatch put-metric-data --namespace TuxNetOps --metric-name porting-advisor-canary --value 0 --dimensions OS=windows-latest
