@@ -50,5 +50,4 @@ if($LASTEXITCODE -ne 0) {
     throw "**ERROR**: pyinstaller failed, binary was not created"
 }
 
-Remove-Item .\dist\$Filename\pyinstaller-5.0.1.dist-info -Recurse
 Write-Output "*** Success: Executable saved at dist\$Filename ***"
