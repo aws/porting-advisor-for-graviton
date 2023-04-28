@@ -9,6 +9,8 @@ if [ ! -f ".venv/bin/activate" ]; then
     ./setup-environment.sh
 fi
 
+. .venv/bin/activate
+
 FILE_NAME=`./getBinaryName.sh`
 echo "*** Will use $FILE_NAME as name ***"
 
