@@ -99,9 +99,9 @@ def main(argv=sys.argv[1:]):
     args = parser.parse_args(argv)
 
     if (args.log_to_console):
-        logging.basicConfig(level=get_logging_level(args.logging_level), format='%(asctime)s-%(levelname)s-%(message)s')
+        logging.basicConfig(level=get_logging_level(args.logging_level), format='%(asctime)s - %(levelname)s - %(message)s')
     else:
-        logging.basicConfig(level=get_logging_level(args.logging_level), format='%(asctime)s-%(levelname)s-%(message)s', filename=args.log_file)
+        logging.basicConfig(level=get_logging_level(args.logging_level), format='%(asctime)s - %(levelname)s - %(message)s', filename=args.log_file)
 
     if not os.path.exists(args.root):
         print(_('%s: directory not found.') % args.root, file=sys.stderr)

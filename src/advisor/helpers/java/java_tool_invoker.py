@@ -74,7 +74,8 @@ class JavaToolInvoker():
                 return False
             
             pom_path = path.abspath(path.join(path.dirname(__file__), '..', '..', 'tools', 'graviton-ready-java', 'pom.xml'))
-            mvn_process = subprocess.run(['mvn', 'package', '--file', pom_path], capture_output=True)
+            logging.debug(f'POM file: {pom_path}')
+            mvn_process = subprocess.run(f'mvn package --file {pom_path}', capture_output=True, shell=True)
             if (mvn_process.returncode == 0):
                 return True
             
