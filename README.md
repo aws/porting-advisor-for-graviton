@@ -35,13 +35,45 @@ This is a fork of [Porting advisor](https://github.com/arm-hpc/porting-advisor),
 
 For more information on how to modify issues reported, use the tool’s built-in help:
 
-```
+```bash
 ./porting-advisor-linux-x86_64 -–help
 ```
 
 If you run into any issues, see our [CONTRIBUTING](CONTRIBUTING.md#reporting-bugsfeature-requests) file.
 
 # How to run:
+
+## As a container
+
+By using this option, you don't need to worry about Python or Java versions, or any other dependency that the tool needs. This is the quickest way to get started. 
+
+**Pre-requisites**
+
+- Docker or [containerd](https://github.com/containerd/containerd) + [nerdctl](https://github.com/containerd/nerdctl) + [buildkit](https://github.com/moby/buildkit)
+
+**Build container image**
+
+NOTE: if using containerd, you can substitute `docker` with `nerdctl`
+
+```bash
+docker build -t porting-advisor:latest .
+```
+
+**Run container image**
+
+After building the image, we can run the tool as a container. We use `-v` to mount a volume from our host machine to the container.
+
+We can run it directly to console:
+
+```bash
+docker run -v ~/my/path:/my-path porting-advisor /my-path/src
+```
+
+Or generate a report:
+
+```bash
+docker run -v ~/my/path:/my-path porting-advisor /my-path/src --output /my-path/output/report.html
+```
 
 ## As a Python script
 
@@ -53,30 +85,30 @@ If you run into any issues, see our [CONTRIBUTING](CONTRIBUTING.md#reporting-bug
 **Enable Python Environment**
 
 Linux/Mac:
-```
-$. python3 -m venv .venv
-$. source .venv/bin/activate
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 Powershell:
-```
-PS> python -m venv .venv
-PS> .\.venv\Scripts\Activate.ps1
+```shell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 ```
 
 **Install requirements**
-```
-$. pip3 install -r requirements.txt
+```bash
+pip3 install -r requirements.txt
 ```
 
 **Run tool (console output)**
-```
-$. python3 src/porting-advisor.py ~/my/path/to/my/repo
+```bash
+python3 src/porting-advisor.py ~/my/path/to/my/repo
 ```
 
 **Run tool (HTML report)**
-```
-$. python3 src/porting-advisor.py ~/my/path/to/my/repo --output report.html
+```bash
+python3 src/porting-advisor.py ~/my/path/to/my/repo --output report.html
 ```
 
 ## As a binary
@@ -90,14 +122,14 @@ $. python3 src/porting-advisor.py ~/my/path/to/my/repo --output report.html
 
 The `build.sh` script will generate a self-contained binary (for Linux/MacOS). It will be output to a folder called `dist`.
 
-```
-$ ./build.sh
+```bash
+./build.sh
 ```
 
 For Windows, the `Build.ps1` will generate a folder with an EXE and all the files it requires to run.
 
-```
-PS> .\Build.ps1
+```shell
+.\Build.ps1
 ```
 
 **Running the binary**
@@ -107,23 +139,23 @@ PS> .\Build.ps1
 Once you have the binary generated, it will only require Java 11 Runtime (or above) if you want to scan JAR files for native methods. Otherwise, the file is self-contained and doesn't need Python to run.
 
 Default behaviour, console output:
-```
+```bash
 $ ./porting-advisor-linux-x86_64 ~/my/path/to/my/repo
 ```
 
 Generating HTML report:
-```
+```bash
 $ ./porting-advisor-linux-x86_64 ~/my/path/to/my/repo --output report.html
 ```
 
 Generating a report of just dependencies (this creates an Excel file with just the dependencies we found on the repo, no suggestions provided):
-```
+```bash
 $ ./porting-advisor-linux-x86_64 ~/my/path/to/my/repo --output dependencies.xlsx --output-format dependencies
 ```
 
 ### Sample console report output:
 
-```
+```bash
 ./dist/porting-advisor-linux-x86_64 ./sample-projects/
 | Elapsed Time: 0:00:03
 
