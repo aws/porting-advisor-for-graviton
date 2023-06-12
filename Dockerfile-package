@@ -1,3 +1,3 @@
-FROM public.ecr.aws/amazoncorretto/amazoncorretto:17.0.7-al2023
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:17-al2023
 COPY ./dist/porting-advisor /usr/bin/porting-advisor
 ENTRYPOINT ["/usr/bin/porting-advisor"]
