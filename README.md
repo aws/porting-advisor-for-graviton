@@ -53,10 +53,17 @@ By using this option, you don't need to worry about Python or Java versions, or 
 
 **Build container image**
 
-NOTE: if using containerd, you can substitute `docker` with `nerdctl`
+**NOTE:** if using containerd, you can substitute `docker` with `nerdctl`
 
 ```bash
 docker build -t porting-advisor .
+```
+
+**NOTE:** on Windows you might need to run these commands to avoid bash scripts having their line ends changed to CRLF:
+
+```shell
+git config core.autocrlf false
+git reset --hard
 ```
 
 **Run container image**
@@ -66,13 +73,19 @@ After building the image, we can run the tool as a container. We use `-v` to mou
 We can run it directly to console:
 
 ```bash
-docker run --rm -v ~/my/path:/my-path porting-advisor /my-path/src
+docker run --rm -v my/repo/path:/repo porting-advisor /repo
 ```
 
 Or generate a report:
 
 ```bash
-docker run --rm -v ~/my/path:/my-path porting-advisor /my-path/src --output /my-path/output/report.html
+docker run --rm -v my/repo/path:/repo -v my/output:/output porting-advisor /repo --output /output/report.html
+```
+
+Windows example:
+
+```shell
+docker run --rm -v /c/Users/myuser/repo:/repo -v /c/Users/myuser/output:/output porting-advisor /repo --output /output/report.html
 ```
 
 ## As a Python script
