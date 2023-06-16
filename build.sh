@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This script converts the porting-advisor python code into
 # a x86 or arm64 Linux or Mac binary like a.out.

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Runs unit tests, generates the binary and then runs it against sample projects
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 function test_line() {
     reportType=$1
     result_filename=$2

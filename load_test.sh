@@ -1,3 +1,5 @@
+#!/bin/bash
+
 FILE_NAME=`./getBinaryName.sh`
 chmod +x ./dist/$FILE_NAME
 
