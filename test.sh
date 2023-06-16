@@ -28,3 +28,13 @@ echo "🧪 Running integration tests"
 if [ $? -ne 0 ]; then
     echo "**ERROR**: integration tests failed" && exit 1
 fi
+
+
+if hash docker
+then
+    echo "🐋 Running container tests"
+    ./container-test.sh
+    if [ $? -ne 0 ]; then
+        echo "**ERROR**: error generating jar for Graviton Ready Java tool" && exit 1
+    fi
+fi

@@ -56,7 +56,7 @@ By using this option, you don't need to worry about Python or Java versions, or 
 NOTE: if using containerd, you can substitute `docker` with `nerdctl`
 
 ```bash
-docker build -t porting-advisor:latest .
+docker build -t porting-advisor .
 ```
 
 **Run container image**
@@ -66,13 +66,13 @@ After building the image, we can run the tool as a container. We use `-v` to mou
 We can run it directly to console:
 
 ```bash
-docker run -v ~/my/path:/my-path porting-advisor /my-path/src
+docker run --rm -v ~/my/path:/my-path porting-advisor /my-path/src
 ```
 
 Or generate a report:
 
 ```bash
-docker run -v ~/my/path:/my-path porting-advisor /my-path/src --output /my-path/output/report.html
+docker run --rm -v ~/my/path:/my-path porting-advisor /my-path/src --output /my-path/output/report.html
 ```
 
 ## As a Python script
