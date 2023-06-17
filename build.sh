@@ -11,7 +11,12 @@ fi
 
 . .venv/bin/activate
 
-FILE_NAME=`./getBinaryName.sh`
+if [[ -z "${FILE_NAME}" ]]; then
+  FILE_NAME=`./getBinaryName.sh`
+else
+  FILE_NAME="${FILE_NAME}"
+fi
+
 echo "*** Will use $FILE_NAME as name ***"
 
 if hash mvn

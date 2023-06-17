@@ -10,9 +10,9 @@ COPY . .
 RUN /usr/bin/python3.11 -m venv .venv && \
     source .venv/bin/activate && \
     python3 -m pip install -r requirements-build.txt && \
-    ./build.sh
+    FILE_NAME=porting-advisor ./build.sh
 
-RUN mv dist/porting-advisor-linux-$(uname -m) /opt/porting-advisor
+RUN mv dist/porting-advisor /opt/porting-advisor
 
 # Use Amazon Corretto as runtime
 FROM public.ecr.aws/amazoncorretto/amazoncorretto:17-al2023 as runtime
