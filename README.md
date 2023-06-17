@@ -45,7 +45,7 @@ If you run into any issues, see our [CONTRIBUTING](CONTRIBUTING.md#reporting-bug
 
 ## As a container
 
-By using this option, you don't need to worry about Python or Java versions, or any other dependency that the tool needs. This is the quickest way to get started. 
+By using this option, you don't need to worry about Python or Java versions, or any other dependency that the tool needs. This is the quickest way to get started.
 
 **Pre-requisites**
 
@@ -134,6 +134,8 @@ python3 src/porting-advisor.py ~/my/path/to/my/repo --output report.html
 - (Optionally) Open JDK 17 (or above) and Maven 3.5 (or above) if you want the binary to be able to scan JAR files for native methods.
 
 The `build.sh` script will generate a self-contained binary (for Linux/MacOS). It will be output to a folder called `dist`.
+
+By default, it will generate a binary named like `porting-advisor-linux-x86_64`. You can customize generated filename by setting environment variable `FILE_NAME`.
 
 ```bash
 ./build.sh
