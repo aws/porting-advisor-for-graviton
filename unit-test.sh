@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "🐍 Making sure Python Virtual Environment is active"
 . .venv/bin/activate

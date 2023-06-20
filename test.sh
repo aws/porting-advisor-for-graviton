@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Runs unit tests, generates the binary and then runs it against sample projects
 
@@ -27,4 +27,14 @@ echo "🧪 Running integration tests"
 ./integration-test.sh
 if [ $? -ne 0 ]; then
     echo "**ERROR**: integration tests failed" && exit 1
+fi
+
+
+if hash docker
+then
+    echo "🐋 Running container tests"
+    ./container-test.sh
+    if [ $? -ne 0 ]; then
+        echo "**ERROR**: error generating jar for Graviton Ready Java tool" && exit 1
+    fi
 fi

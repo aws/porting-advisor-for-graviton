@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This script sets up the Python Virtual Environment to install dependencies
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This script converts the porting-advisor python code into
 # a x86 or arm64 Linux or Mac binary like a.out.
@@ -11,7 +11,12 @@ fi
 
 . .venv/bin/activate
 
-FILE_NAME=`./getBinaryName.sh`
+if [[ -z "${FILE_NAME}" ]]; then
+  FILE_NAME=`./getBinaryName.sh`
+else
+  FILE_NAME="${FILE_NAME}"
+fi
+
 echo "*** Will use $FILE_NAME as name ***"
 
 if hash mvn
