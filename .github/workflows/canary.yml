@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
   # Run this once a day to check if everything is still working as expected.
-    - cron: "0 12 * * *"
+    - cron: "0 6,12 * * *"
 
 permissions:
   id-token: write
