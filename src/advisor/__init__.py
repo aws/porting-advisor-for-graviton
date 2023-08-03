@@ -17,7 +17,7 @@ SPDX-License-Identifier: Apache-2.0
 """
 
 __project__ = 'porting-advisor'
-__version__ = '1.0.2'
+__version__ = '1.1.0'
 __summary__ = 'Produces an aarch64 porting readiness report.'
 __webpage__ = 'http://www.gitlab.com/arm-hpc/porting-advisor'
 

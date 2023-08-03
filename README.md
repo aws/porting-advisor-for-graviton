@@ -5,6 +5,8 @@ This is a fork of [Porting advisor](https://github.com/arm-hpc/porting-advisor),
 
  It is a command line tool that analyzes source code for known code patterns and dependency libraries. It then generates a report with any incompatibilities with our Graviton processors. This tool provides suggestions of minimal required and/or recommended versions to run on Graviton instances for both language runtime and dependency libraries. It can run on non-ARM based machines (no Graviton processor needed). This tool does not work on binaries, just source code. It does not make any code modifications, it doesn’t make API level recommendations, nor does it send data back to AWS.
 
+**PLEASE NOTE: Even though we do our best to find known incompatibilities, we still recommend to perform the appropriate tests to your application on a Graviton instance before going to Production.**
+
  This tool scans all files in a source tree, regardless of whether they are included by the build system or not. As such it may erroneously report issues in files that appear in the source tree but are excluded by the build system. Currently, the tool supports the following languages/dependencies:
 
 * Python 3+
