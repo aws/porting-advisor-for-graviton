@@ -6,7 +6,8 @@ RUN yum install java-17-amazon-corretto python3.11 python3.11-pip maven binutils
 ENV JAVA_HOME=/usr/lib/jvm/java
 ENV MAVEN_HOME=/usr/share/maven
 
-COPY . .
+COPY src src/
+COPY build.sh setup-environment.sh getBinaryName.sh requirements-build.txt ./
 RUN /usr/bin/python3.11 -m venv .venv && \
     source .venv/bin/activate && \
     python3 -m pip install -r requirements-build.txt && \

@@ -5,10 +5,6 @@ source ./test-helpers.sh
 # This script tests container image build and runs a couple of
 # tests against the generated image.
 
-if [ -d ".venv" ]; then
-    mv .venv .venv_temp
-fi
-
 docker build -t porting-advisor .
 if [ $? -ne 0 ]; then
     echo "**ERROR**: building container image" && exit 1
@@ -29,9 +25,5 @@ if [ $? -ne 0 ]; then
     echo "**ERROR**: running container to html report" && exit 1
 fi
 rm -f test.html
-
-if [ -d ".venv_temp" ]; then
-    mv .venv_temp .venv
-fi
 
 exit 0
