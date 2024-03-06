@@ -8,6 +8,7 @@
         "recommendedVersion": "1.18"
     },
     "libraryRules": [
-        { "name": "github.com/golang/snappy", "minVersion": "0.0.2" }
+        { "name": "github.com/golang/snappy", "minVersion": "0.0.2" },
+        { "name": "github.com/argoproj/argo-cd/v2", "minVersion": "2.4.0" }
     ]
 }
