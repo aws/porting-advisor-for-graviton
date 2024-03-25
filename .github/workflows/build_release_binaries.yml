@@ -3,6 +3,9 @@ on:
   release:
     types:
       - published
+    branches: 
+    - main
+    - release/*
 jobs:
 
   build:
