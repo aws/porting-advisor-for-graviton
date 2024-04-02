@@ -16,8 +16,12 @@ limitations under the License.
 
 SPDX-License-Identifier: Apache-2.0
 """
+import sys
 
 from advisor import main
 
 if __name__ == '__main__':
+    if sys.version_info < (3, 10):
+        print("Python 3.10 or newer is required to run this application.")
+        sys.exit(1)
     main()
