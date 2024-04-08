@@ -64,7 +64,6 @@ $Dependencies = @(
     "<si><t>coverlet.collector</t></si><si><t>1.2.0</t></si>"
     "<si><t>SciPy</t></si>"
     "<si><t>NumPy</t></si>"
-    "<si><t>FakeDependency</t></si><si><t>1.2.3</t></si>"
     "<si><t>cors</t></si><si><t>2.8.5</t></si>"
     "<si><t>express</t></si><si><t>4.18.1</t></si>"
     "<si><t>rxjs</t></si><si><t>7.5.6</t></si>"
