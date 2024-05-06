@@ -1,5 +1,23 @@
 #!/bin/bash
 
+function get_sample_projects_relative_path() {
+    # Copy all sample projects to temp directory and rename project manifests to correct format.
+    # This is done to avoid security scanning them for deprecated/vulnerable library dependancies
+    # These sample projects are not intended to be used in production, but are used for testing
+    sample_projects_dir=$RANDOM
+    mkdir -p ./temp/$sample_projects_dir && cp -r ./sample-projects/* ./temp/$sample_projects_dir
+    mv ./temp/$sample_projects_dir/dotnet-samples/sample_csproj_PLACEHOLDER ./temp/$sample_projects_dir/dotnet-samples/sample.csproj
+    mv ./temp/$sample_projects_dir/go-samples/compatible/go_mod_PLACEHOLDER ./temp/$sample_projects_dir/go-samples/compatible/go.mod
+    mv ./temp/$sample_projects_dir/go-samples/incompatible/go_mod_PLACEHOLDER ./temp/$sample_projects_dir/go-samples/incompatible/go.mod
+    mv ./temp/$sample_projects_dir/java-samples/pom_xml_PLACEHOLDER ./temp/$sample_projects_dir/java-samples/pom.xml
+    mv ./temp/$sample_projects_dir/node-samples/package_json_PLACEHOLDER ./temp/$sample_projects_dir/node-samples/package.json
+    mv ./temp/$sample_projects_dir/python-samples/compatible/requirements_txt_PLACEHOLDER ./temp/$sample_projects_dir/python-samples/compatible/requirements.txt
+    mv ./temp/$sample_projects_dir/python-samples/incompatible/requirements_txt_PLACEHOLDER ./temp/$sample_projects_dir/python-samples/incompatible/requirements.txt
+    mv ./temp/$sample_projects_dir/ruby-samples/Gemfile_PLACEHOLDER ./temp/$sample_projects_dir/ruby-samples/Gemfile
+
+    echo ./temp/$sample_projects_dir
+}
+
 function test_line() {
     reportType=$1
     result_filename=$2

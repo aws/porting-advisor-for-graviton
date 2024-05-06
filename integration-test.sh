@@ -5,14 +5,17 @@ source ./test-helpers.sh
 FILE_NAME=`./getBinaryName.sh`
 chmod +x ./dist/$FILE_NAME
 
+echo "Setting up sample-projects"
+sample_project_directory=$(get_sample_projects_relative_path)
+
 echo "Running samples to console"
-./dist/$FILE_NAME ./sample-projects/ > console_test.txt
+./dist/$FILE_NAME $sample_project_directory > console_test.txt
 test_report 'console' 'console_test.txt' "${lines_to_find[@]}"
 rm console_test.txt
 
 
 echo "Running samples to HTML report"
-./dist/$FILE_NAME ./sample-projects/ --output test.html
+./dist/$FILE_NAME $sample_project_directory --output test.html
 test_report 'html' 'test.html' "${lines_to_find[@]}"
 rm test.html
 
@@ -57,7 +60,7 @@ declare -a dependencies=("<si><t>component</t></si><si><t>version</t></si><si><t
                         "<si><t>httpclient</t></si>"
                         "<si><t>jruby-openssl</t></si>"
                     )
-./dist/$FILE_NAME ./sample-projects/ --output test.xlsx --output-format dependencies
+./dist/$FILE_NAME $sample_project_directory --output test.xlsx --output-format dependencies
 # xlsx files are compressed files, so we need to unzip them and then compare them
 mkdir ./temp
 unzip -q ./test.xlsx -d ./temp
@@ -86,3 +89,4 @@ else
     echo "**FAILED**: directory not found test" && exit 1 
 fi
 rm directory_not_found_test.txt
+

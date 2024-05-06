@@ -149,10 +149,3 @@ end''')
         self.assertEqual('Gemfile', dependencies[0].filename)
         self.assertEqual('ruby', dependencies[0].tool)
     
-    def test_scan_folder_returns_array_of_all_dependencies(self):
-        manifester = Manifester()
-        sample_path = path.abspath(path.join(path.dirname(__file__), '..', 'sample-projects'))
-        dependencies = manifester.scan_folder(sample_path)
-        self.assertGreater(len(dependencies), 0)
-        self.assertIsInstance(dependencies, list)
-        self.assertIsInstance(dependencies[0], Dependency)

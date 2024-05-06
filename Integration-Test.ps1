@@ -35,12 +35,27 @@ $Lines_To_Find = @(
     "using dependency library github.com/golang/snappy version 0.0.1. upgrade to at least version 0.0.2"
 )
 
+Write-Host "Setting up sample-projects"
+# Copy all sample projects to temp directory and rename project manifests to correct format.
+# This is done to avoid security scanning them for deprecated/vulnerable library dependancies
+# These sample projects are not intended to be used in production, but are used for testing
+$sample_projects_dir = Get-Random
+Copy-Item -Path "./sample-projects" -Destination "./temp/$sample_projects_dir" -Recurse
+Rename-Item -Path "./temp/$sample_projects_dir/dotnet-samples/sample_csproj_PLACEHOLDER" -NewName "sample.csproj"
+Rename-Item -Path "./temp/$sample_projects_dir/go-samples/compatible/go_mod_PLACEHOLDER" -NewName "go.mod"
+Rename-Item -Path "./temp/$sample_projects_dir/go-samples/incompatible/go_mod_PLACEHOLDER" -NewName "go.mod"
+Rename-Item -Path "./temp/$sample_projects_dir/java-samples/pom_xml_PLACEHOLDER" -NewName "pom.xml"
+Rename-Item -Path "./temp/$sample_projects_dir/node-samples/package_json_PLACEHOLDER" -NewName "package.json"
+Rename-Item -Path "./temp/$sample_projects_dir/python-samples/compatible/requirements_txt_PLACEHOLDER" -NewName "requirements.txt"
+Rename-Item -Path "./temp/$sample_projects_dir/python-samples/incompatible/requirements_txt_PLACEHOLDER" -NewName "requirements.txt"
+Rename-Item -Path "./temp/$sample_projects_dir/ruby-samples/Gemfile_PLACEHOLDER" -NewName "Gemfile"
+
 Write-Host "Running samples to console"
-$ResultConsole = Invoke-Expression ".\dist\$Filename\$Filename.exe .\sample-projects"
+$ResultConsole = Invoke-Expression ".\dist\$Filename\$Filename.exe .\temp\$sample_projects_dir"
 Test-Report "Console" $ResultConsole $Lines_To_Find
 
 Write-Host "Running samples to HTML report"
-Invoke-Expression ".\dist\$Filename\$Filename.exe .\sample-projects --output test.html"
+Invoke-Expression ".\dist\$Filename\$Filename.exe .\temp\$sample_projects_dir --output test.html"
 $ResultHtml = Get-Content -Path test.html
 Test-Report "HTML" $ResultHtml $Lines_To_Find
 Remove-Item -Path test.html
@@ -86,7 +101,7 @@ $Dependencies = @(
     "<si><t>httpclient</t></si>"
     "<si><t>jruby-openssl</t></si>"
 )
-Invoke-Expression ".\dist\$Filename\$Filename.exe .\sample-projects --output test.xlsx --output-format dependencies"
+Invoke-Expression ".\dist\$Filename\$Filename.exe .\temp\$sample_projects_dir --output test.xlsx --output-format dependencies"
 # xlsx files are compressed files, so we need to unzip them and then compare them
 Expand-Archive test.xlsx -DestinationPath temp
 $ResultXlsx = Get-Content ".\temp\xl\sharedStrings.xml"
