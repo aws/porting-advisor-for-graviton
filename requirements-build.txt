@@ -10,6 +10,6 @@ progressbar33==2.4
 pyinstaller==5.13.1
 pyinstaller-hooks-contrib==2023.6
 pyparsing==3.1.1
-requests==2.31.0
+requests==2.32.0
 urllib3==2.0.7
 XlsxWriter==3.1.2
