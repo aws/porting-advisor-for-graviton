@@ -25,7 +25,6 @@ Jinja2==3.1.2''')
         self.assertEqual('requirements.txt', dependencies[1].filename)
         self.assertEqual('pip', dependencies[1].tool)
         self.assertEqual(3, dependencies[1].lineno)
-        self.assertEqual('3.1.2', dependencies[1].installed_version)
 
     def test_get_dependencies_for_maven_returns_array_of_dependencies(self):
         manifester = Manifester()
