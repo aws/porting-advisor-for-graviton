@@ -29,7 +29,7 @@ fi
 
 echo "🏗️ Generating executable"
 CERT_PATH=$(python3 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')
-pyinstaller --onefile --clean --noconfirm --distpath dist --add-data 'src/advisor/rules/*.json:advisor/rules' --add-data 'src/advisor/tools/graviton-ready-java/target/*:advisor/tools/graviton-ready-java/target' --add-data 'src/advisor/templates/template.html:advisor/templates' --add-data "$CERT_PATH/certifi/cacert.pem:certifi" --name "$FILE_NAME" "src/porting-advisor.py" --runtime-hook 'src/updater.py' --exclude-module readline
+pyinstaller --onefile --clean --noconfirm --distpath dist --add-data 'src/advisor/rules/*.json:advisor/rules' --add-data 'src/advisor/tools/graviton-ready-java/target/*:advisor/tools/graviton-ready-java/target' --add-data 'src/advisor/templates/template.html:advisor/templates' --add-data "$CERT_PATH/certifi/cacert.pem:certifi" --name "$FILE_NAME" "src/porting-advisor.py" --exclude-module readline
 if [ $? -ne 0 ]; then
     echo "**ERROR**: pyinstaller failed, binary was not created" && exit 1
 fi

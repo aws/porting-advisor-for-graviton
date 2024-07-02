@@ -171,3 +171,5 @@ dependencies.xlsx
 [Ll]og/
 
 *.jar
+
+temp/
