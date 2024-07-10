@@ -173,3 +173,5 @@ dependencies.xlsx
 *.jar
 
 temp/
+
+.DS_Store
