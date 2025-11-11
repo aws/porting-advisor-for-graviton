@@ -51,10 +51,12 @@ jobs:
           git clone https://github.com/awslabs/git-secrets.git target
           cd target
           ./install.ps1
+          cd ..
+          rm -r -Force target/
           echo "Git-secrets installation completed"
           git secrets --register-aws --global
           echo "Added aws secret templates"
-          git secrets --scan -r ../
+          git secrets --scan -r .
           echo "Repository scan completed"
     
     - name: Set up Python ${{ matrix.python-version }}
