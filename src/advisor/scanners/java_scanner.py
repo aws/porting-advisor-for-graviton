@@ -3,6 +3,7 @@ from os import path
 from ..helpers.java.java_tool_invoker import JavaToolInvoker
 from ..helpers.utils import Utils
 from ..manifester.manifester import Manifester
+from ..reports.error import Error
 from ..reports.issues.native_methods_issue import NativeMethodsIssue
 from ..reports.report_item import ReportItem
 from .language_scanner import LanguageScanner
@@ -33,6 +34,8 @@ class JavaScanner(LanguageScanner):
                 result, message = tool_invoker.graviton_ready_assessor(filename)
                 if (result == 3):
                     report.add_issue(NativeMethodsIssue(message, filename=filename))
+                elif (result == -1):
+                    report.add_error(Error(message, filename=filename))
             elif is_jar_or_war:
                 self.add_jar_remark(report)
 
