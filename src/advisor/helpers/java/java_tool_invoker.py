@@ -55,7 +55,7 @@ class JavaToolInvoker():
                 if line.startswith('Native methods:'):
                     return 3, line
 
-            return java_process.returncode
+            return java_process.returncode, 'No native methods found in scanned JAR files.'
         except:
             logging.debug('Error scanning JAR files.', exc_info=True)
             return -1, f'Error scanning JAR files.'
